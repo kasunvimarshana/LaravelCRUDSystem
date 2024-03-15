@@ -37,7 +37,7 @@ Default Link `http://localhost:8000/api/documentation`
 
 ## ER
 
-![ER Diagram.](./ER.png "ER Diagram.")
+![ER Diagram.](/ER.png "ER Diagram.")
 
 
 

@@ -1,0 +1,1241 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Laravel",
+        "description": "Laravel",
+        "contact": {
+            "name": "hello@example.com",
+            "email": "hello@example.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000",
+            "description": "Local server"
+        }
+    ],
+    "paths": {
+        "/api/v1/customers/store": {
+            "post": {
+                "tags": [
+                    "Customers"
+                ],
+                "summary": "Store new Customer",
+                "description": "Store new Customer",
+                "operationId": "customer_store",
+                "requestBody": {
+                    "description": "Register new Customer",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CustomerCreateRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonResponseResource"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/customers/show/{id}": {
+            "get": {
+                "tags": [
+                    "Customers"
+                ],
+                "summary": "Select existing Customer",
+                "description": "Select existing Customer",
+                "operationId": "customer_show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Customer id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonResponseResource"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthennticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/customers/filter": {
+            "get": {
+                "tags": [
+                    "Customers"
+                ],
+                "summary": "Filter existing Customers",
+                "description": "Filter existing Customers",
+                "operationId": "customer_filter",
+                "parameters": [
+                    {
+                        "name": "perPage",
+                        "in": "query",
+                        "description": "Page Limit",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 10
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 0
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Search term",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonResponseResource"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthennticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/customers/update/{id}": {
+            "put": {
+                "tags": [
+                    "Customers"
+                ],
+                "summary": "Update existing Customer",
+                "description": "Update existing Customer",
+                "operationId": "customer_update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Customer id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update existing Customer",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CustomerUpdateRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonResponseResource"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonResponseResource"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonResponseResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonResponseResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/customers/flag-as-deleted/{id}": {
+            "delete": {
+                "tags": [
+                    "Customers"
+                ],
+                "summary": "Soft Delete existing Customer",
+                "description": "Soft Delete existing Customer",
+                "operationId": "customer_flagAsDeleted",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Customer id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/customers/permanently-delete-records/{id}": {
+            "delete": {
+                "tags": [
+                    "Customers"
+                ],
+                "summary": "Force Delete existing Customer",
+                "description": "Force Delete existing Customer",
+                "operationId": "customer_destroyPermanently",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Customer id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/customer-medication-purchase/store": {
+            "post": {
+                "tags": [
+                    "CustomerTransactions"
+                ],
+                "summary": "Store new Customer Medication Purchas",
+                "description": "Store new Customer Medication Purchas",
+                "operationId": "purchaseMedication",
+                "requestBody": {
+                    "description": "Register new Customer Medication Purchas",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CustomerMedicationPurchaseRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonResponseResource"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/customer-medication-return-request/store": {
+            "post": {
+                "tags": [
+                    "CustomerTransactions"
+                ],
+                "summary": "Store new Customer Medication Return",
+                "description": "Store new Customer Medication Return",
+                "operationId": "returnMedication",
+                "requestBody": {
+                    "description": "Create new Customer Medication Return",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CustomerMedicationReturnRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonResponseResource"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/login": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Login",
+                "description": "Login to system",
+                "operationId": "login",
+                "requestBody": {
+                    "description": "Login to system",
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [
+                                    "username",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "username": {
+                                        "description": "Username",
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "description": "User password",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonResponseResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/api/v1/medications/store": {
+            "post": {
+                "tags": [
+                    "Medications"
+                ],
+                "summary": "Store new Medication",
+                "description": "Store new Medication",
+                "operationId": "medication_store",
+                "requestBody": {
+                    "description": "new Medication",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MedicationCreateRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonResponseResource"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/medications/show/{id}": {
+            "get": {
+                "tags": [
+                    "Medications"
+                ],
+                "summary": "Select existing Medication",
+                "description": "Select existing Medication",
+                "operationId": "medication_show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Medication id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonResponseResource"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthennticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/medications/filter": {
+            "get": {
+                "tags": [
+                    "Medications"
+                ],
+                "summary": "Filter existing Medications",
+                "description": "Filter existing Medications",
+                "operationId": "medication_filter",
+                "parameters": [
+                    {
+                        "name": "perPage",
+                        "in": "query",
+                        "description": "Page Limit",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 10
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 0
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Search term",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonResponseResource"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthennticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/medications/update/{id}": {
+            "put": {
+                "tags": [
+                    "Medications"
+                ],
+                "summary": "Update existing Medication",
+                "description": "Update existing Medication",
+                "operationId": "medication_update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Medication id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update existing Medication",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MedicationUpdateRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonResponseResource"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonResponseResource"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonResponseResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonResponseResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/medications/flag-as-deleted/{id}": {
+            "delete": {
+                "tags": [
+                    "Medications"
+                ],
+                "summary": "Soft Delete existing Medication",
+                "description": "Soft Delete existing Medication",
+                "operationId": "medication_flagAsDeleted",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Medication id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/medications/permanently-delete-records/{id}": {
+            "delete": {
+                "tags": [
+                    "Medications"
+                ],
+                "summary": "Force Delete existing Medication",
+                "description": "Force Delete existing Medication",
+                "operationId": "medication_destroyPermanently",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Medication id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/profile": {
+            "get": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "User profile",
+                "description": "User profile",
+                "operationId": "profile_show",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonResponseResource"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthennticated"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/logout": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "User logout",
+                "description": "User logout",
+                "operationId": "logout",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonResponseResource"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/register": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Register",
+                "description": "Register new User",
+                "operationId": "register",
+                "requestBody": {
+                    "description": "Register new User",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "username",
+                                    "password",
+                                    "password_confirmation",
+                                    "role"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Name",
+                                        "type": "string",
+                                        "example": "Kasun Vimarshana"
+                                    },
+                                    "username": {
+                                        "description": "Username",
+                                        "type": "string",
+                                        "example": "kasun"
+                                    },
+                                    "password": {
+                                        "description": "User password",
+                                        "type": "string",
+                                        "example": "password"
+                                    },
+                                    "password_confirmation": {
+                                        "description": "User confirm password",
+                                        "type": "string",
+                                        "example": "password"
+                                    },
+                                    "role": {
+                                        "description": "User Role",
+                                        "type": "string",
+                                        "example": "owner|manager|cashier"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonResponseResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "User": {
+                "title": "User",
+                "description": "User Model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "name": {
+                        "title": "Name",
+                        "description": "Name",
+                        "type": "string",
+                        "example": "Kasun Vimarshana"
+                    },
+                    "email": {
+                        "title": "Email",
+                        "description": "Email",
+                        "type": "string",
+                        "example": "kasunvmail@gmail.com"
+                    },
+                    "password": {
+                        "title": "Password",
+                        "description": "Password",
+                        "type": "string",
+                        "example": "password"
+                    },
+                    "created_at": {
+                        "title": "Created at",
+                        "description": "Created at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    },
+                    "updated_at": {
+                        "title": "Updated at",
+                        "description": "Updated at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "User"
+                }
+            },
+            "CustomerCreateRequest": {
+                "title": "Customer Create request",
+                "description": "Customer Create request body data",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "description": "Customer Name",
+                        "type": "string",
+                        "example": "Kasun Vimarshana"
+                    },
+                    "address": {
+                        "title": "address",
+                        "description": "Customer Address",
+                        "type": "string",
+                        "example": "Address"
+                    },
+                    "phone": {
+                        "title": "phone",
+                        "description": "Customer Name",
+                        "type": "string",
+                        "example": "0000000000"
+                    },
+                    "email": {
+                        "title": "email",
+                        "description": "Customer Email",
+                        "type": "string",
+                        "example": "kasunvmail@gmail.com"
+                    }
+                },
+                "type": "object"
+            },
+            "CustomerMedicationPurchaseRequest": {
+                "title": "Customer Medication Purchase Request",
+                "description": "Customer Medication Purchase Request body data",
+                "required": [
+                    "customer_id",
+                    "medication_id",
+                    "quantity"
+                ],
+                "properties": {
+                    "quantity": {
+                        "title": "quantity",
+                        "description": "Quantity",
+                        "example": 1
+                    },
+                    "remarks": {
+                        "title": "remarks",
+                        "description": "additional details about the transaction",
+                        "type": "string",
+                        "example": "remark"
+                    },
+                    "medication_id": {
+                        "title": "medication_id",
+                        "description": "Medication id",
+                        "example": 1
+                    },
+                    "customer_id": {
+                        "title": "customer_id",
+                        "description": "Customer id",
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            },
+            "CustomerMedicationReturnRequest": {
+                "title": "Customer Medication Return Request",
+                "description": "Customer Medication Return Request body data",
+                "required": [
+                    "customer_id",
+                    "medication_id",
+                    "quantity"
+                ],
+                "properties": {
+                    "quantity": {
+                        "title": "quantity",
+                        "description": "Quantity",
+                        "example": 1
+                    },
+                    "remarks": {
+                        "title": "remarks",
+                        "description": "additional details about the transaction",
+                        "type": "string",
+                        "example": "remark"
+                    },
+                    "medication_id": {
+                        "title": "medication_id",
+                        "description": "Medication id",
+                        "example": 1
+                    },
+                    "customer_id": {
+                        "title": "customer_id",
+                        "description": "Customer id",
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            },
+            "CustomerUpdateRequest": {
+                "title": "Customer Update request",
+                "description": "Customer Update request body data",
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "description": "Customer Name",
+                        "type": "string",
+                        "example": "Kasun Vimarshana"
+                    },
+                    "address": {
+                        "title": "address",
+                        "description": "Customer Address",
+                        "type": "string",
+                        "example": "Address"
+                    },
+                    "phone": {
+                        "title": "phone",
+                        "description": "Customer Name",
+                        "type": "string",
+                        "example": "0000000000"
+                    },
+                    "email": {
+                        "title": "email",
+                        "description": "Customer Email",
+                        "type": "string",
+                        "example": "kasunvmail@gmail.com"
+                    }
+                },
+                "type": "object"
+            },
+            "MedicationCreateRequest": {
+                "title": "Medication Create request",
+                "description": "Medication Create request body data",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "description": "Medication Name",
+                        "type": "string",
+                        "example": "Medication 01"
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "Medication Description",
+                        "type": "string",
+                        "example": "Description"
+                    },
+                    "quantity": {
+                        "title": "quantity",
+                        "description": "Medication Quantity",
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            },
+            "MedicationUpdateRequest": {
+                "title": "Medication Update request",
+                "description": "Medication Update request body data",
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "description": "Medication Name",
+                        "type": "string",
+                        "example": "Medication 01"
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "Medication Description",
+                        "type": "string",
+                        "example": "Description"
+                    },
+                    "quantity": {
+                        "title": "quantity",
+                        "description": "Medication Quantity",
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            },
+            "JsonResponseResource": {
+                "title": "JsonResponseResource",
+                "description": "Json Response Resource",
+                "properties": {
+                    "status": {
+                        "title": "Status",
+                        "description": "Status",
+                        "type": "string"
+                    },
+                    "message": {
+                        "title": "Message",
+                        "description": "Message",
+                        "type": "string"
+                    },
+                    "data": {
+                        "title": "Data",
+                        "description": "Data",
+                        "nullable": true
+                    },
+                    "errors": {
+                        "title": "Errors",
+                        "description": "Errors",
+                        "nullable": true
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "JsonResponseResource"
+                }
+            },
+            "UserResource": {
+                "title": "UserResource",
+                "description": "User Resource",
+                "properties": {
+                    "data": {
+                        "$ref": "#/components/schemas/User"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "UserResource"
+                }
+            },
+            "UsersResource": {
+                "title": "UsersResource",
+                "description": "Users Resource",
+                "properties": {
+                    "data": {
+                        "title": "Data",
+                        "description": "Data wrapper",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/User"
+                        }
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "UsersResource"
+                }
+            }
+        },
+        "securitySchemes": {
+            "bearer_token": {
+                "type": "http",
+                "scheme": "bearer",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    }
+}
